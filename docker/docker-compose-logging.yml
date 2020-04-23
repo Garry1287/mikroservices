@@ -1,0 +1,49 @@
+version: '3.5'
+services:
+  fluentd:
+    image: ${USERNAME}/fluentd
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+  elasticsearch:
+    image: elasticsearch:7.6.2
+    expose:
+      - 9200
+    ports:
+      - "9200:9200"
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=docker-cluster
+      - node.master=true
+      - cluster.initial_master_nodes=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  kibana:
+    image: kibana:7.6.2
+    ports:
+      - "5601:5601"
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      back_net:
+      front_net:
+        aliases:
+          - zipkin
+
+networks:
+#   reddit:
+  front_net:
+    ipam:
+      config:
+        - subnet: 10.0.1.0/24
+  back_net:
+    ipam:
+      config:
+        - subnet: 10.0.2.0/24
+
