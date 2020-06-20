@@ -785,3 +785,286 @@ garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/
 🤔  Verifying proxy health ...
 http://127.0.0.1:38907/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
 
+
+
+
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+
+
+
+
+
+
+
+
+
+
+
+ minikube start --vm-driver=kvm2
+  423  kubectl get nodes
+  424  cat ~/.kube/config
+  425  ip a
+  426  kubectl config current-context
+  427  kubectl config get-contexts
+  428  kubectl get nodes
+  429  kubectl get pods
+  430  kubectl config view
+  431  cd minikube/
+  432  ls
+  433  ls -al
+  434  minikube start --extra-config=apiserver.basic-auth-file=/var/lib/minikube/certs/minikube/users
+  435  kubectl claster-info dump | less
+  436  kubectl cluster-info dump | less
+  437  kubectl claster-info dump | less
+  438  kubectl cluster-info dump | less
+  439  kubectl cluster-info dump | grep "basic-auth-file"
+  440  cd 
+  441  cd .kube/
+  442  ls
+  443  cat config 
+  444  vi config-static-admin
+  445  kubectl config view
+  446  export KUBECONFIG=~/.kube/config:~/.kube/config-static-admin
+  447  kubectl config view
+  448  kubectl config get-context
+  449  kubectl config get-contexts
+  450  kubectl config use-context minikube-static
+  451  kubectl config get-contexts
+  452  kubectl cluster-info dump
+  453  cd 
+  454  ls
+  455  mkdir devops_learn
+  456  cd devops_learn/
+  457  mkdir kuber
+  458  mkdir lessons
+  459  cd lessons/
+  460  ls
+  461  mkdir 05
+  462  cd 05
+  463  vi demo03-sa.yml
+  464  kubectl config get-contexts
+  465  kubectl config use-context minikube
+  466  kubectl apply -f demo03-sa.yml 
+  467  kubectl get sa
+  468  ls ~/.kube/
+  469  cp ~/.kube/config-static-admin ~/.kube/config-service-admin
+  470  vi  ~/.kube/config-service-admin
+  471  kubectl describe sa service-admin
+  472  kubectl get secret service-admin-token-5znrv
+  473  kubectl get secret service-admin-token-5znrv -o wipe
+  474  kubectl get secret service-admin-token-5znrv -o yaml
+  475  kubectl get secret service-admin-token-5znrv
+  476  cat demo03-sa.yml
+  477  kubectl get secret service-admin-token-5znrv -o "jsonpath={.data.token}" | base64 -d
+  478  kubectl get secret service-admin-token-5znrv -o "jsonpath={.data.token}" | base64 -D
+  479  kubectl get secret service-admin-token-5znrv -o "jsonpath={.data.token}" | base64 -d
+  480  kubectl get secret service-admin-token-5znrv -o "jsonpath={.data.token}"
+  481  kubectl get secret service-admin-token-5znrv -o wipe
+  482  vi  ~/.kube/config-service-admin
+  483  kubectl describe sa service-admin
+  484  vi  ~/.kube/config-service-admin
+  485  export KUBECONFIG=~/.kube/config:~/.kube/config-static-admin:~./kube/config-service-admin
+  486  kubectl config view
+  487  kubectl config use-context minikube-service
+  488  export KUBECONFIG=~/.kube/config:~/.kube/config-static-admin:~/.kube/config-service-admin
+  489  kubectl config view
+  490  kubectl config use-context minikube-service
+  491  kubectl cluster-info dump
+  492  cat ~/.kube/config-static-admin
+  493  cat ~/.kube/config-service-admin
+  494  ls
+  495  cat demo03-sa.yml 
+  496  kubectl api-resources
+  497  minikube status
+  498  kubectl api-resources
+  499  kubelctl get clusterrole | grep -v system
+  500  kubectl get clusterrole | grep -v system
+
+  503  kubectl config get-contexts
+  504  kubectl config use-contexts minikube
+  505  kubectl config use-context minikube
+  506  kubectl get clusterrole | grep -v system
+  507  kubectl get clusterrole admin -o yaml
+  508  kubectl get clusterrole admin -o yaml | less
+  509  kubectl get clusterrole cluster-admin -o yaml | less
+  510  kubectl get clusterrolebindings
+  511  kubectl get clusterrolebindings | grep -v system
+  512  kubectl get clusterrolebindings cluster-admin
+  513  kubectl get clusterrolebindings kubernetes-dashboard
+  514  kubectl get clusterrolebindings cluster-admin -o yml
+  515  kubectl get clusterrolebindings cluster-admin -o yaml
+  516  history
+
+
+
+
+
+
+
+
+gcloud container clusters get-credentials my-cluster-29a --region europe-west1 --project docker-257312
+
+
+gcloud container clusters delete my-cluster-29 --region europe-west1 --project docker-257312
+
+
+
+garry@home-pc:~$ kubectl describe secret default
+Name:         default-token-ffxtb
+Namespace:    default
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: default
+              kubernetes.io/service-account.uid: a7c2311a-b2bd-11ea-b399-42010a840044
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+namespace:  7 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tZmZ4dGIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImE3YzIzMTFhLWIyYmQtMTFlYS1iMzk5LTQyMDEwYTg0MDA0NCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.on53Hl7D0Z0t6XmfcSalAMYscsMz0iqOtF5m0KjPB9-A0QoJzscuHAKOFwIkKh8ghvueb0E5qbUwmx2obR94_w6oJ_cC9xq0V2qrJ2TTU4F4giipL8ItJ0gzWLufCutDhJt105qmgoCxtpxFaW8Er7RvlfQpLHUCCtVw_MLBfUtTTX-XFgYO6xemhydmxbohJ_dC-g93zBphAekYFse0CpEhv2uDaHUNi4Zi9-Hu2E1POq-Jc_E2yPjalobh4PbCWeKc5GfLnXI0LCPBymOVk-RitxfY9RQMS90hJSDYIocvmFIswglyGKsqHIdAP4j8sI0HQL0JyOjeIbmolNyRpw
+ca.crt:     1115 bytes
+
+
+
+
+kubernetes-dashboard 	
+OK
+	Cluster IP 	
+
+    10.0.10.229 
+
+	1/1 	kube-system 	my-cluster-29a 
+
+
+
+
+
+
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus$ cd garry_microservices/kubernetes/
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices/kubernetes$ ls
+comment-deployment.yml       comment-service.yml  kuber.log            mongo-deployment.yml  post-mongodb-service.yml  ui-deployment.yml
+comment-mongodb-service.yml  dev-namespaces.yml   mongodb-service.yml  post-deployment.yml   post-service.yml          ui-service.yml
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices/kubernetes$ kubectl apply -f dev-namespaces.yml 
+namespace/dev created
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices/kubernetes$ kubectl apply -f ./* -n dev
+error: Unexpected args: [./comment-mongodb-service.yml ./comment-service.yml ./dev-namespaces.yml ./kuber.log ./mongodb-service.yml ./mongo-deployment.yml ./post-deployment.yml ./post-mongodb-service.yml ./post-service.yml ./ui-deployment.yml ./ui-service.yml]
+See 'kubectl apply -h' for help and examples
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices/kubernetes$ cd ..
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices$ kubectl apply -f ../kubernetes -n dev
+error: the path "../kubernetes" does not exist
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices$ kubectl apply -f ./kubernetes -n dev
+deployment.apps/comment created
+service/comment-db created
+service/comment created
+namespace/dev unchanged
+deployment.apps/mongo created
+service/mongodb created
+deployment.apps/post created
+service/post-db created
+service/post created
+deployment.apps/ui created
+service/ui created
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices$ kubectl get nodes -o wide
+NAME                                            STATUS   ROLES    AGE   VERSION           INTERNAL-IP   EXTERNAL-IP     OS-IMAGE                             KERNEL-VERSION   CONTAINER-RUNTIME
+gke-my-cluster-29a-default-pool-ba4658ce-8l2z   Ready    <none>   18m   v1.14.10-gke.36   10.132.0.20   34.77.174.92    Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-my-cluster-29a-default-pool-ba4658ce-n4kw   Ready    <none>   18m   v1.14.10-gke.36   10.132.0.21   35.240.93.238   Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-my-cluster-29a-default-pool-e47f97eb-dc1d   Ready    <none>   18m   v1.14.10-gke.36   10.132.0.25   34.77.31.67     Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-my-cluster-29a-default-pool-e47f97eb-kfb8   Ready    <none>   18m   v1.14.10-gke.36   10.132.0.24   35.241.215.38   Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-my-cluster-29a-default-pool-f298e153-3057   Ready    <none>   18m   v1.14.10-gke.36   10.132.0.22   34.77.157.95    Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+gke-my-cluster-29a-default-pool-f298e153-hgz5   Ready    <none>   18m   v1.14.10-gke.36   10.132.0.23   34.78.184.188   Container-Optimized OS from Google   4.14.138+        docker://18.9.7
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices$ kubectl describe service ui
+^C
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices$ kubectl describe service ui -n dev | grep NodePort
+Type:                     NodePort
+NodePort:                 <unset>  32092/TCP
+garry@home-pc:/media/garry/56d75952-dea4-43c7-856f-29e3448b8edc/garry/dev_learn/otus/garry_microservices$ kubectl proxy
+Starting to serve on 127.0.0.1:8001
+2020/06/20 09:58:53 http: proxy error: context canceled
+2020/06/20 10:13:19 http: proxy error: context canceled
+
+
+
+
+
+
+
+
+
+
+
+
+Service account запускается внутри namespace
+
+
+
+configmaps is forbidden: User "system:serviceaccount:default:default" cannot list resource "configmaps" in API group "" in the namespace "default" 
+
+
+
+
+Цепляться по адресу необходимо было с этим токеном http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=default
+
+garry@home-pc:~$ kubectl get sa kubernetes-dashboard -n kube-system
+NAME                   SECRETS   AGE
+kubernetes-dashboard   1         91m
+garry@home-pc:~$ kubectl get sa kubernetes-dashboard -n kube-system -o yml
+error: unable to match a printer suitable for the output format "yml", allowed formats are: custom-columns,custom-columns-file,go-template,go-template-file,json,jsonpath,jsonpath-file,name,template,templatefile,wide,yaml
+garry@home-pc:~$ kubectl get sa kubernetes-dashboard -n kube-system -o yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","k8s-app":"kubernetes-dashboard"},"name":"kubernetes-dashboard","namespace":"kube-system"}}
+  creationTimestamp: "2020-06-20T06:17:13Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+  resourceVersion: "480"
+  selfLink: /api/v1/namespaces/kube-system/serviceaccounts/kubernetes-dashboard
+  uid: ae7b76f0-b2bd-11ea-b399-42010a840044
+secrets:
+- name: kubernetes-dashboard-token-vhxg2
+garry@home-pc:~$ kubectl describe secret kubernetes-dashboard-token-vhxg2
+Error from server (NotFound): secrets "kubernetes-dashboard-token-vhxg2" not found
+garry@home-pc:~$ kubectl describe secret kubernetes-dashboard-token-vhxg2 -n kube-system
+Name:         kubernetes-dashboard-token-vhxg2
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: kubernetes-dashboard
+              kubernetes.io/service-account.uid: ae7b76f0-b2bd-11ea-b399-42010a840044
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+namespace:  11 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi12aHhnMiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImFlN2I3NmYwLWIyYmQtMTFlYS1iMzk5LTQyMDEwYTg0MDA0NCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.WgdDuued1tyM9CzgJz53VNC3jLaBgbCO-ao-h2Wwc7G2tcsS4Y8-cIEoNItFVIQs4Ra_ifYw6k1PNN2EuuOqF3vvQQmjQwREfH0G7s9jrerrbj6J0q6x-Tu9QlegOxHWRdl8PdgleKMshw7djnflhKux4rl5lCubZg_V6MH04x0k21Zb21Pd5YVADfUfTNQMJG5ETDreumOcs2-wbDF3rsSMSw0KbIBtu79IlpKg2WenOOPzAYcrUPDEFCMuL9OYY_vAGT-dQnptYKxsHLbcjO9guAKlLymRJfMIjbmvyyQzoslwhvfh7KJruobn6IrzoZG_AgI_Zvj5gr8xeYiGrQ
+ca.crt:     1115 bytes
+
+RBAC
+https://habr.com/ru/company/flant/blog/470503/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Terraform and GKE
+https://www.terraform.io/docs/providers/google/guides/using_gke_with_terraform.html
+https://www.terraform.io/docs/providers/google/r/container_cluster.html
+https://habr.com/ru/post/340884/
